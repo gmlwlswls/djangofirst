@@ -17,7 +17,7 @@ def hello(request) :
 from rest_framework import status
 from rest_framework.generics import get_object_or_404
 
-from .models import Book
+from .models import Book #현재 디렉토리의 models.py에서 Book import 
 from .serializers import BookSerializer
 
 #GET과 POST 모두를 처리
@@ -38,4 +38,12 @@ def booksAPI(request) :
     serializer = BookSerializer(data = request.data)
     if serializer.is_valid():
       serializer.save()
-    return Response(serializer.data)
+      return Response(serializer.data)
+
+@api_view(['GET'])
+def oneBookAPI(request, bid) :
+  #Book 테이블에서 bid 컬럼의 값이 bid인 값을 찾아옵니다.
+  book = get_object_or_404(Book, bid = bid)
+  #출력할 수 있도록 변환
+  serializer = BookSerializer(book)
+  return Response(serializer.data)
