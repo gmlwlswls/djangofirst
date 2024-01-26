@@ -38,4 +38,4 @@ def booksAPI(request) :
     serializer = BookSerializer(data = request.data)
     if serializer.is_valid():
       serializer.save()
-    return Response(serializer.errors)
+    return Response(serializer.data)

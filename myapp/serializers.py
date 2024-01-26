@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Book
 
-class BookSerializer(serializers.Model) :       #serializers 상속
+class BookSerializer(serializers.ModelSerializer) :       #serializers 상속
   class Meta:
     model = Book
     #클라이언트에서 입력하는 데이터만 나열 #models.py 에 본인이 입력해야 하는 것만
